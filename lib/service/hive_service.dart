@@ -12,12 +12,15 @@ class HiveDB {
 
     List stringList = card.map((note) => jsonEncode(note.toJson()))
         .toList();
-    await box.put("cards", stringList);
+    await box.put("cards", stringList,);
   }
   static List<CardModel> loadNotes() {
 
-    List<String> stringList = box.get("cards") ;
+    List<String> stringList = box.get("cards",defaultValue: <String>[]) ;
+
     List<CardModel> noteList = stringList.map((string) => CardModel.fromJson(jsonDecode(string))).toList();
+    print("hive service");
+    print(noteList);
     return noteList;
   }
 
